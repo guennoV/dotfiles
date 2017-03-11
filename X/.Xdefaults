@@ -1,0 +1,9 @@
+#######################
+# Xterm configuration #
+#######################
+
+XTerm*background: black
+XTerm*foreground: white
+
+xterm*faceName: Sauce Code Powerline:size=10
+

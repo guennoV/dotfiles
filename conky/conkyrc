@@ -1,0 +1,171 @@
+##########################
+# Configuration settings #
+##########################
+
+# Window configuration
+
+minimum_size 1000 1000
+#minimum_size 1900 1000
+maximum_width 1920
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+
+# Font configuration
+
+use_xft yes
+
+# Conky configuration
+
+double_buffer yes
+update_interval 1
+
+######################
+# Variables settings #
+######################
+
+TEXT
+
+${image /home/atem/Images/wallhaven-61957.jpg -p 0,0 -s 1000,1000}
+
+##############################################################################
+# Display the current kernel version
+
+#Kernel = $kernel
+
+##############################################################################
+# Show the address of the different interface
+# Display upload and download value
+
+${if_up wlo1} \
+  IP on wlan0 : ${addr wlo1}
+  Upload = ${upspeedf wlan0}
+  Download = ${downspeedf wlan0}
+${endif}
+${if_up eth0} \
+  IP on eth0 : ${addr eth0}
+  Upload = ${upspeedf eth0}
+  Download = ${downspeedf eth0}
+${endif}
+
+##############################################################################
+# Display current date and time
+date : ${time %A %d %B %Y}
+time : ${time %H:%M}
+
+##############################################################################
+# Display the battery charge in percent
+
+Battery charge : ${apcupsd_charge}
+
+##############################################################################
+# Display the differents cpu informations
+
+cpu1 : ${cpu cpu1}
+cpu2 : ${cpu cpu2}
+cpu3 : ${cpu cpu3}
+cpu4 : ${cpu cpu4}
+
+#[\
+# Pacman updates:
+#{"full_text":"PACMAN","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${exec pacman -Qu | wc -l}","color":"\#888888","separator":false,"separator_block_width":6},\
+
+# Uptime:
+#{"full_text":"UPTIME","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${uptime_short}","color":"\#888888","separator":false,"separator_block_width":6},\
+
+# CPU temperature and usage:
+#{"full_text":"CPU","color":"\#444444","separator":false,"separator_block_width":0},\
+#{"full_text":"${if_match ${hwmon 2 temp 2}<45}${hwmon 2 temp 2}","color":"\#92B37D","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${hwmon 2 temp 2}<50}${hwmon 2 temp 2}","color":"\#CCAE5E","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${hwmon 2 temp 2}<55}${hwmon 2 temp 2}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${hwmon 2 temp 2}>=55}${hwmon 2 temp 2}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${endif}${endif}${endif}${endif}"},\
+#{"full_text":"°C","color":"\#888888","separator":false,"separator_block_width":6},\
+
+#{"full_text":"","color":"\#888888","separator":false,"separator_block_width":0},\
+#{"full_text":"${if_match ${cpu cpu1}<25}${cpu cpu1}","color":"\#92B37D","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu1}<50}${cpu cpu1}","color":"\#CCAE5E","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu1}<75}${cpu cpu1}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu1}<=100}${cpu cpu1}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+#{"full_text":"${endif}${endif}${endif}${endif}"},\
+#{"full_text":"%","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+#{"full_text":"${if_match ${cpu cpu2}<25}${cpu cpu2}","color":"\#92B37D","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu2}<50}${cpu cpu2}","color":"\#CCAE5E","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu2}<75}${cpu cpu2}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu2}<=100}${cpu cpu2}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+#{"full_text":"${endif}${endif}${endif}${endif}"},\
+#{"full_text":"%","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+#{"full_text":"${if_match ${cpu cpu3}<25}${cpu cpu3}","color":"\#92B37D","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu3}<50}${cpu cpu3}","color":"\#CCAE5E","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu3}<75}${cpu cpu3}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu3}<=100}${cpu cpu3}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+#{"full_text":"${endif}${endif}${endif}${endif}"},\
+#{"full_text":"%","color":"\#888888","separator":false,"separator_block_width":4},\
+#
+#{"full_text":"${if_match ${cpu cpu4}<25}${cpu cpu4}","color":"\#92B37D","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu4}<50}${cpu cpu4}","color":"\#CCAE5E","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu4}<75}${cpu cpu4}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${cpu cpu4}<=100}${cpu cpu4}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+#{"full_text":"${endif}${endif}${endif}${endif}"},\
+#{"full_text":"%","color":"\#888888","separator":false,"separator_block_width":6},\
+
+# Memory:
+#{"full_text":"MEM","color":"\#444444","separator":false,"separator_block_width":3},\
+#{"full_text":"$mem / $memmax","color":"\#888888","separator":false,"separator_block_width":6},\
+
+# Storage:
+#{"full_text":"SSD","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${fs_used /} /${fs_size /}","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"HDD","color":"\#444444","separator":false,"separator_block_width":0},\
+#{"full_text":"${fs_used /mnt/internal} /${fs_size /mnt/internal}","color":"\#888888","separator":false,"separator_block_width":6},\
+
+# Download:
+#{"full_text":"DOWN","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${if_match ${downspeedf enp3s0}<100}${downspeed enp3s0}","color":"\#92B37D","separator":false,"separator_block_width":6},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${downspeedf enp3s0}<300}${downspeed enp3s0}","color":"\#CCAE5E","separator":false,"separator_block_width":6},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${downspeedf enp3s0}<700}${downspeed enp3s0}","color":"\#DB70B8","separator":false,"separator_block_width":6},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${downspeedf enp3s0}<1000}${downspeed enp3s0}","color":"\#9470DB","separator":false,"separator_block_width":6},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${downspeedf enp3s0}>=1000}${downspeed enp3s0}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+#{"full_text":"${endif}${endif}${endif}${endif}${endif}"},\
+
+# Upload:
+#{"full_text":"UP","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${if_match ${upspeedf enp3s0}<15}${upspeed enp3s0}","color":"\#92B37D","separator":false,"separator_block_width":6},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${upspeedf enp3s0}<35}${upspeed enp3s0}","color":"\#CCAE5E","separator":false,"separator_block_width":6},\
+#{"full_text":"${else}"},\
+#{"full_text":"${if_match ${upspeedf enp3s0}>=35}${upspeed enp3s0}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+#{"full_text":"${endif}${endif}${endif}"},\
+#{"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
+
+# Date:
+#{"full_text":"DATE","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${time %d.%m.%Y}","color":"\#888888","separator":false,"separator_block_width":6},\
+# Time:
+#{"full_text":"|","color":"\#444444","separator":false,"separator_block_width":6},\
+#{"full_text":"${time %R}","color":"\#888888","separator":false}\
+#]
