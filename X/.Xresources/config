@@ -10,6 +10,7 @@
 
 !# Font
 XTerm*faceName: Sauce Code Powerline:size=10
+st*faceName: Sauce Code Powerline:size=10
 
 !# Ensure that UTF-8 is correctly interpreted
 XTerm*locale: true

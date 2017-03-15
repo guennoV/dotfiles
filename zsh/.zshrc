@@ -224,7 +224,8 @@ setopt LONG_LIST_JOBS
 setopt TRANSIENT_RPROMPT
 
 # powerline
-. /usr/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+POWERLINE_BASE_PATH=$(find /usr/lib -type d -and -name 'python3*')
+. $POWERLINE_BASE_PATH/site-packages/powerline/bindings/zsh/powerline.zsh
 
 ######################################################################
 ##
@@ -342,10 +343,11 @@ alias grep='grep --color=auto'
 ######################################################################
 
 # Selects keymap `emacs', and also links it to `main'.
-#bindkey -e
+bindkey -e
 
 # Selects keymap `vim'
-bindkey -v
+# Not so useful since nvim is the super term layer.
+#bindkey -v
 
 
 
