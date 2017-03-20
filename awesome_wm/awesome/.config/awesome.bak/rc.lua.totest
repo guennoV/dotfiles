@@ -1,0 +1,46 @@
+-- Volume Keys available via the alsa-utils package and playerctl
+awful.key({}, "#122", function ()
+  awful.util.spawn("amixer -q -D pulse sset Master 5%-")
+end),
+awful.key({}, "#123", function ()
+  awful.util.spawn("amixer -q -D pulse sset Master 5%+")
+end),
+awful.key({}, "XF86AudioMute", function ()
+  awful.util.spawn("amixer -D pulse set Master 1+ toggle")
+end),
+-- Media Keys
+awful.key({}, "XF86AudioPlay", function()
+  awful.util.spawn("playerctl play-pause")
+end),
+awful.key({}, "XF86AudioNext", function()
+  awful.util.spawn("playerctl next")
+end),
+awful.key({}, "XF86AudioPrev", function()
+  awful.util.spawn("playerctl previous")
+end)
+
+-- Pseudo-Transparency
+--To change transparency for the actual selected window by pressing Modkey + PgUp/PgDown you can also use transset-df and the following modification to your rc.lua:
+
+globalkeys = awful.util.table.join(
+    -- your keybindings
+    [...]
+    awful.key({ modkey }, "Next", function (c)
+        awful.util.spawn("transset-df --actual --inc 0.1")
+    end),
+    awful.key({ modkey }, "Prior", function (c)
+        awful.util.spawn("transset-df --actual --dec 0.1")
+    end),
+    -- Your other key bindings
+    [...]
+)
+
+-- Remove windows gap
+size_hints_honor = false
+
+-- set wallpaper
+beautiful.init("~/.config/awesome/themes/default/theme.lua")
+for s = 1, screen.count() do
+	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+end
+
