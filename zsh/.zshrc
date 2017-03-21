@@ -22,10 +22,11 @@ export PKG_CONFIG_PATH=/home/atem/Documents/Uavia/embedded_system/build_x86_64-L
 export UAVIA_EMBEDDED_SYSTEM_DIR=/home/atem/Documents/Uavia/embedded_system
 
 # nvim
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1 # Cursor is a rectangle in command mode, and I-Beam in insert mode
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1   # Cursor is a rectangle in command mode, and I-Beam in insert mode
+export NVIM_TUI_ENABLE_TRUE_COLOR=1     # Add support for true color in terminal.
 
-
-
+# Set transparent background for xterm
+#[ -n "$XTERM_VERSION" ] && transset-df --id "$WINDOWID" > /dev/null
 
 ######################################################################
 ###
@@ -335,6 +336,7 @@ alias m='make'
 alias cln='clean'
 alias iit_auth='/bin/ns_auth -u guenno_v'
 alias grep='grep --color=auto'
+alias diff='diff --color=auto'
 
 ######################################################################
 ###
