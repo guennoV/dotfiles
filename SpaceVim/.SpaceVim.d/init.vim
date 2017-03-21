@@ -46,7 +46,7 @@ let g:spacevim_disabled_plugins=[
 let g:spacevim_custom_plugins = [
  \ ['edkolev/promptline.vim'],
  \ ['gilligan/vim-lldb'],
- \ ['myusuf3/numbers.vim'],
+ \ ['myusuf3/numbers.vim', {'hook_add' : "let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'nerdtree', 'terminal']"}],
  \ ['plasticboy/vim-markdown', {'on_ft' : 'markdown'}],
  \ ['vim-scripts/a.vim', {'on_ft' : 'cpp'}],
  \ ['kien/rainbow_parentheses.vim'],
@@ -67,7 +67,7 @@ let g:startify_session_persistence = 1
 
 " Enable the option only in case you think Vim starts too slowly (because of
 " Startify)
-"let g:startify_enable_unsafe = 1
+let g:startify_enable_unsafe = 1
 
 " 2}}}
 
@@ -81,10 +81,10 @@ let g:startify_session_persistence = 1
 "let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 
 " enable/disable promptline integration >
-let g:airline#extensions#promptline#enabled = 1
+"let g:airline#extensions#promptline#enabled = 1
 
 " configure the path to the snapshot .sh file. Mandatory option.
-let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
+"let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
 
 " 2}}}
 
@@ -165,6 +165,19 @@ let g:rbpt_loadcmd_toggle = 0
 " 2}}}
 
 " 1}}}
+
+" Terminal config
+" ---------------
+
+" The plugin 'numbers.vim' will not be activated on the terminal filetype thus
+" we set this value when opening a terminal buffer.
+autocmd TermOpen * if &buftype == 'terminal' | setl filetype=terminal | endif
+
+" General configuration
+
+" Do not show the mode in the command line (it is useless to show it there
+" since 'airline' already do it, in a nicest way).
+set noshowmode
 
 " Workspace Setup
 " ----------------
