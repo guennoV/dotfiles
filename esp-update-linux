@@ -1,0 +1,15 @@
+# Directory to copy the kernel, the initramfs
+ESP_DIR="/boot/efi/EFI/ArchLinux"
+
+build() {
+	cp /boot/vmlinuz-linux "${ESP_DIR}/vmlinuz-linux.efi"
+	# Copy ucode if used
+	[[ -f /boot/intel-code.img ]] && mv /boot/intel-ucode.img "${ESP_DIR}/"
+}
+
+help() {
+	cat << HELPEOF
+This hook copies the kernel in the ESP partition ESP
+HELPEOF
+}
+

@@ -5,5 +5,8 @@
 XTerm*background: black
 XTerm*foreground: white
 
+XTerm.transparent:   true
+XTerm.shading:       20
+
 xterm*faceName: Sauce Code Powerline:size=10
 

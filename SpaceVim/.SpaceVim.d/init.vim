@@ -1,3 +1,8 @@
+" global config
+tnoremap <C-w>h <C-\><C-n><C-w>h
+tnoremap <C-w>j <C-\><C-n><C-w>j
+tnoremap <C-w>k <C-\><C-n><C-w>k
+tnoremap <C-w>l <C-\><C-n><C-w>l
 
 " Set the options of SpaceVim.
 let g:spacevim_default_indent = 4
@@ -29,8 +34,9 @@ let g:spacevim_unite_leader = 'f'
 " with the following, then the plugins for go development will be loaded.
 call SpaceVim#layers#load('lang#cpp')
 
-" Load ui layer
+" Load layers
 call SpaceVim#layers#load('ui')
+call SpaceVim#layers#load('expand-fold')
 
 " If there is a particular plugin you don't like, you can define this
 " variable to disable them entirely:
@@ -50,6 +56,9 @@ let g:spacevim_custom_plugins = [
  \ ['plasticboy/vim-markdown', {'on_ft' : 'markdown'}],
  \ ['vim-scripts/a.vim', {'on_ft' : 'cpp'}],
  \ ['kien/rainbow_parentheses.vim'],
+ \ ['chaoren/vim-wordmotion'],
+ \ ['rliang/termedit.nvim'],
+ \ ['vhdirk/vim-cmake'],
  \ ]
 
 " {{{1
@@ -120,7 +129,7 @@ let g:neomake_cpp_enabled_makers = ['cmake', 'clang']
 
 let g:neomake_cpp_cmake_maker = {
     \ 'exe': 'cmake',
-    \ 'args': ['--build', 'libb2occ/cmake-build-debug'],
+    \ 'args': ['--build', "$UAVIA_EMBEDDED_BUILD/build_libb2occ"],
     \ 'append_file': 0,
     \ 'errorformat': '%f:%l:%c %m'
     \ }
@@ -164,6 +173,14 @@ let g:rbpt_loadcmd_toggle = 0
 "au Syntax * RainbowParenthesesLoadBraces
 " 2}}}
 
+" {{{2
+" wordmotion
+
+" Use g:wordmotion_prefix to apply a common prefix to each of the default word motion mappings.
+let g:wordmotion_prefix = '<Leader>'
+
+" 2}}}
+
 " 1}}}
 
 " Terminal config
@@ -171,7 +188,10 @@ let g:rbpt_loadcmd_toggle = 0
 
 " The plugin 'numbers.vim' will not be activated on the terminal filetype thus
 " we set this value when opening a terminal buffer.
-autocmd TermOpen * if &buftype == 'terminal' | setl filetype=terminal | endif
+autocmd TermOpen term://* setl filetype=terminal
+
+" To switch to terminal mode automatically.
+"autocmd BufEnter term://* startinsert | setl filetype=terminal
 
 " General configuration
 

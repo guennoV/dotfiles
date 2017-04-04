@@ -1,0 +1,10 @@
+( if
+( or
+( contains ( application_name ) "nvim" )
+( contains ( window_class ) "xterm" )
+)
+( begin
+( spawn_async ( str "transset-df -i " (window_xid) " 0.55" ))
+)
+)
+

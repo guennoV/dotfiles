@@ -3,8 +3,8 @@ export PATH="${PATH}:/usr/local/sbin:/usr/local/bin"
 # System
 export PATH="${PATH}:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Atem bin
-export PATH="/home/atem/bin:${PATH}"
+# Local
+export PATH="$HOME/bin:${PATH}"
 
 export EDITOR='nvim'
 export HISTFILE="$HOME/.history"
@@ -18,8 +18,9 @@ export WATCHFMT='%n has %a %l from %m at %T'
 export LOGIN='guenno_v'
 
 # Environment variable for UAVIA
-export PKG_CONFIG_PATH=/home/atem/Documents/Uavia/embedded_system/build_x86_64-Linux4.9.11-1-ARCH/release/lib/pkgconfig
-export UAVIA_EMBEDDED_SYSTEM_DIR=/home/atem/Documents/Uavia/embedded_system
+export UAVIA_EMBEDDED_SOFTWARE_DIR=/home/atem/Documents/Uavia/embedded_software
+export UAVIA_EMBEDDED_BUILD=$UAVIA_EMBEDDED_SOFTWARE_DIR/build_$(uname -m)-$(uname -s)
+export PKG_CONFIG_PATH=$UAVIA_EMBEDDED_BUILD_DIR/release/lib/pkgconfig:/usr/local/lib/pkgconfig
 
 # nvim
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1   # Cursor is a rectangle in command mode, and I-Beam in insert mode
@@ -119,8 +120,16 @@ compinit
 
 # Enable verbose completion
 zstyle ':completion:*' verbose yes
+
 # Display list of completion
 zstyle ':completion:*' menu select=2
+
+# compinit will not automatically find new executables in  the  $PATH.
+# For example, after installing a new package, the files  in  /usr/bin
+# would  not  be  immediately  or   automatically   included   in  the
+# completion.  Thus, set automatically to use rehash to have the  news
+# executable includes.
+zstyle ':completion:*' rehash true
 
 
 ######################################################################
@@ -289,8 +298,8 @@ setopt ZLE
 # The zsh line editor can be edited in the '$EDITOR'
 autoload edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd v edit-command-line  # ... when hitting '<Esc>v' (Vim like syntax)
-# bindkey "^X^E" edit-command-line    # ... when hitting '<CTRL>xe' (Emacs like syntax)
+bindkey -M vicmd v edit-command-line    # ... when hitting '<Esc>v' (Vim like syntax)
+bindkey "^X^E" edit-command-line        # ... when hitting '<CTRL>xe' (Emacs like syntax)
 
 function zle-keymap-select zle-line-init {
 # change cursor shape in iTerm2
@@ -409,65 +418,7 @@ setenv()
     typeset -x "${1}${1:+=}${(@)argv[2,$#]}"
 }
 
-
-
-
-######################################################################
-###
-### Prompt system for school and home compatibility.
-###
-######################################################################
-#setprompt()
-#{
-#    CL_NORMAL='%{[0m%}'		# %{[0m%} = normal
-#    CL_GREY='%{[0;30m%}'		# %{[0;30m%} = grey
-#    CL_RED='%{[0;31m%}'		# %{[0;31m%} = red
-#    CL_GREEN='%{[0;32m%}'		# %{[0;32m%} = green
-#    CL_YELLOW='%{[0;33m%}'	# %{[0;33m%} = yellow
-#    CL_BLUE='%{[0;34m%}'		# %{[0;34m%} = blue
-#    CL_VIOLET='%{[0;35m%}'	# %{[0;35m%} = violet
-#    CL_CYAN='%{[0;36m%}'		# %{[0;36m%} = cyan
-#    CL_SPECIAL='%{[1;30m%}'	# %{[1;30m%} = bold grey
-#    case ${HOST} in
-#	*grimly*)
-#	    if [ ${USER} = 'root' ]
-#	    then
-#		PR_USER="[${CL_GREEN}%n${CL_NORMAL} @"
-#		PR_HOST=" ${CL_SPECIAL}%m${CL_NORMAL}] %# "
-#	    elif [ ${USER} = 'rockyluke' ]
-#	    then
-#		PR_USER="${CL_YELLOW}%n${CL_NORMAL}"
-#		PR_HOST=" ${CL_GREEN}%m${CL_NORMAL} %# "
-#	    else
-#		PR_USER="%n"
-#		PR_HOST=" %m %#"
-#	    fi
-#	    ;;
-#	*)
-#	    if [ ${USER} = 'root' ]
-#	    then
-#		PR_USER="[${CL_RED}%n${CL_NORMAL} @"
-#		PR_HOST=" ${CL_SPECIAL}%m${CL_NORMAL}] %# "
-#	    elif [ ${USER} = 'rockyluke' ]
-#	    then
-#		PR_USER="${CL_YELLOW}%n${CL_NORMAL}"
-#		PR_HOST=" ${CL_RED}%m${CL_NORMAL} %# "
-#	    else
-#		PR_USER="(%n@"
-#		PR_HOST="%m %h)"
-#	    fi
-#	    ;;
-#    esac
-#    PROMPT="${PR_USER}${PR_HOST}"
-#    RPROMPT="(%y) [${CL_RED}%~${CL_NORMAL}]"
-#}
-#setprompt
-## EOF
-#
-#if [ -f ${HOME}/.myzshrc ]
-#then
-#    . ${HOME}/.myzshrc
-#fi
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #########################
 ###

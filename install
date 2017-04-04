@@ -1,0 +1,4 @@
+# SSH
+
+sudo systemctl enable sshd.socket sshd@.service
+

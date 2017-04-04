@@ -1,0 +1,7 @@
+Fish-like syntax highlighting
+
+Fish provides a very powerful shell syntax highlighting. To use this in zsh, you can install zsh-syntax-highlighting from offical repository and add following to your zshrc:
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
