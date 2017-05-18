@@ -1,9 +1,9 @@
-#######################
-# Xterm configuration #
-#######################
+!#######################
+!# Xterm configuration #
+!#######################
 
-XTerm*background: black
-XTerm*foreground: white
+!#XTerm*background: black
+!#XTerm*foreground: white
 
 XTerm.transparent:   true
 XTerm.shading:       20
