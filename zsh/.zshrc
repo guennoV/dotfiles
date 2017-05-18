@@ -1,10 +1,10 @@
 # Package
-export PATH="${PATH}:/usr/local/sbin:/usr/local/bin"
+#export PATH="${PATH}:/usr/local/sbin:/usr/local/bin"
 # System
-export PATH="${PATH}:/usr/sbin:/usr/bin:/sbin:/bin"
+#export PATH="${PATH}:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Local
-export PATH="$HOME/bin:${PATH}"
+export PATH="$HOME/.local/bin:${PATH}"
 
 export EDITOR='nvim'
 export HISTFILE="$HOME/.history"
@@ -18,13 +18,7 @@ export WATCHFMT='%n has %a %l from %m at %T'
 export LOGIN='guenno_v'
 
 # Environment variable for UAVIA
-export UAVIA_EMBEDDED_SOFTWARE_DIR=/home/atem/Documents/Uavia/embedded_software
-export UAVIA_EMBEDDED_BUILD=$UAVIA_EMBEDDED_SOFTWARE_DIR/build_$(uname -m)-$(uname -s)
-export PKG_CONFIG_PATH=$UAVIA_EMBEDDED_BUILD_DIR/release/lib/pkgconfig:/usr/local/lib/pkgconfig
-
-# nvim
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1   # Cursor is a rectangle in command mode, and I-Beam in insert mode
-export NVIM_TUI_ENABLE_TRUE_COLOR=1     # Add support for true color in terminal.
+#export UAVIA_EMBEDDED_SOFTWARE_DIR=/home/atem/Documents/Uavia/embedded_dev
 
 # Set transparent background for xterm
 #[ -n "$XTERM_VERSION" ] && transset-df --id "$WINDOWID" > /dev/null
@@ -121,6 +115,9 @@ compinit
 # Enable verbose completion
 zstyle ':completion:*' verbose yes
 
+zstyle ':completion:*' completer _complete _approximate
+zstyle ':completion:*:approximate:::' max-errors 2 numeric
+
 # Display list of completion
 zstyle ':completion:*' menu select=2
 
@@ -131,6 +128,8 @@ zstyle ':completion:*' menu select=2
 # executable includes.
 zstyle ':completion:*' rehash true
 
+# lists full job texts and process command lines
+zstyle ':completion:*:*:kill:*:*' verbose yes
 
 ######################################################################
 ##
@@ -234,7 +233,7 @@ setopt LONG_LIST_JOBS
 setopt TRANSIENT_RPROMPT
 
 # powerline
-POWERLINE_BASE_PATH=$(find /usr/lib -type d -and -name 'python3*')
+POWERLINE_BASE_PATH="/usr/lib/$(ls /usr/lib | grep "^python3.*$")"
 . $POWERLINE_BASE_PATH/site-packages/powerline/bindings/zsh/powerline.zsh
 
 ######################################################################
@@ -332,6 +331,7 @@ alias df='df -h'
 alias du='du -h'
 alias ls='ls -h --color=auto'
 alias ll='ls -l'
+alias l='ll'
 alias la='ls -la'
 alias cp='cp -v'
 alias mv='mv -v'
@@ -346,6 +346,7 @@ alias cln='clean'
 alias iit_auth='/bin/ns_auth -u guenno_v'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+alias build-dev='( eval "$(${HOME}/Documents/Uavia/build_dev_pattern)" )'
 
 ######################################################################
 ###
@@ -403,12 +404,21 @@ preexec()
     print -Pn "\e]0;%n@%m: ${1}\a"
 }
 
+# TODO: if some virtualenv file exists load it
+# TODO: think to a way to unload the loaded file
+#chpwd()
+#{
+#
+# sed 's#\(BASE_DIR=${UAVIA_EMBEDDED_SOFTWARE_DIR}/build_$(uname -m)-$(uname -s)\)$(uname -r)#\1#' build-dev.sh
+# alias build-dev='( eval "$(${HOME}/Documents/Uavia/build_dev_pattern)" )'
+#}
+
 clean()
 {
     SEARCH='.'
     if [ ${1} ]
     then
-	SEARCH=${1}
+        SEARCH=${1}
     fi
     find ${SEARCH} \( -name "*~" -or -name ".*~" -or -name ".*.swp" \) -exec rm -fv {} \;
 }
@@ -418,7 +428,16 @@ setenv()
     typeset -x "${1}${1:+=}${(@)argv[2,$#]}"
 }
 
+# To delete
+export CC=clang
+export CXX=clang++
+export CXXFLAGS='-g2 -ggdb'
+
+# Syntax highlighting plugin
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# hook that will automatically search the official repositories, when entering an unrecognized command
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 #########################
 ###
