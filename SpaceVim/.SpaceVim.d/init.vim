@@ -1,8 +1,49 @@
+" General configuration {{{1
+
+" Do not show the mode in the command line (it is useless to show it there
+" since 'airline' already do it, in a nicest way).
+set noshowmode
+
+" Allow virtual editing in Visual block mode
+set virtualedit=block
+
+" 1}}}
+
+" nvim Config {{{1
 " global config
-tnoremap <C-w>h <C-\><C-n><C-w>h
-tnoremap <C-w>j <C-\><C-n><C-w>j
-tnoremap <C-w>k <C-\><C-n><C-w>k
-tnoremap <C-w>l <C-\><C-n><C-w>l
+tnoremap <C-w>h <Esc><C-w>h
+tnoremap <C-w>j <Esc><C-w>j
+tnoremap <C-w>k <Esc><C-w>k
+tnoremap <C-w>l <Esc><C-w>l
+
+" Control cursor styling
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+
+" 1}}}
+
+
+" cpp setting {{{2
+
+" iN    Indent C++ base class declarations and constructor initializations, if they start in a new line (otherwise they are aligned at the right side of the ':').
+set cino=i-s
+
+":N    Place case labels N characters from the indent of the switch().
+set cino+=:0
+
+" gN    Place C++ scope declarations N characters from the indent of the block they are in.
+set cino+=g0
+
+" mN    When N is non-zero, line up a line starting with a closing parentheses with the first character of the line with the matching opening parentheses.
+set cino+=(s,m1
+
+set cino+=(0
+" jN    Better support for anonymous classes / functions
+set cino+=j1
+" JN    Better support for object declarations (bracket initialisation,
+" JavaScript object, ...)
+set cino+=J1
+
+" 2}}}
 
 " Set the options of SpaceVim.
 let g:spacevim_default_indent = 4
@@ -15,8 +56,18 @@ let g:spacevim_guifont = 'Terminus\ for\ Powerline\ 11'
 " By default it is ~/.cache/vimfiles.
 "let g:spacevim_plugin_bundle_dir = '~/.cache/vimfiles'
 
+" Set the SpaceVim cursor shape in the terminal
+" Set to 2 to enable blinking mode-sensitive cursor
+let g:spacevim_terminal_cursor_shape = 2
+
+" Enable true color support in terminal
+let g:spacevim_enable_guicolors = 1
+
 " set SpaceVim colorscheme
-let g:spacevim_colorscheme = 'NeoSolarized'
+let g:spacevim_colorscheme = 'hybrid'
+
+" SpaceVim background colorscheme
+let g:spacevim_colorscheme_bg = 'dark'
 
 " Set plugin manager, you want to use, default is dein.vim
 let g:spacevim_plugin_manager = 'dein'  " neobundle or dein or vim-plug
@@ -30,13 +81,20 @@ let g:spacevim_windows_leader = 's'
 " Set unite work flow shortcut leader [Unite], default is `f`
 let g:spacevim_unite_leader = 'f'
 
+" Enable YouCompleteMe
+"let g:spacevim_enable_ycm = 1
+
+" Enable realtime leader guide
+let g:spacevim_realtime_leader_guide = 1
+
 " By default, language specific plugins are not loaded. This can be changed
 " with the following, then the plugins for go development will be loaded.
-call SpaceVim#layers#load('lang#cpp')
+call SpaceVim#layers#load('lang#c')
 
 " Load layers
 call SpaceVim#layers#load('ui')
 call SpaceVim#layers#load('expand-fold')
+call SpaceVim#layers#load('incsearch')
 
 " If there is a particular plugin you don't like, you can define this
 " variable to disable them entirely:
@@ -45,12 +103,14 @@ let g:spacevim_disabled_plugins=[
 
 " Add custom plugins
 
-" edkolev/promptline.vim
-" gilligan/vim-lldb         : lldb debugger integration
-" myusuf3/numbers.vim       : toggle intelligently line numbers
-" plasticboy/vim-markdown   : markdown syntax plugin
+" gilligan/vim-lldb                     : lldb debugger integration
+" myusuf3/numbers.vim                   : toggle intelligently line numbers
+" plasticboy/vim-markdown               : markdown syntax plugin
+" blueyed/vim-diminactive               : better display for focused / unfocused buffer
+" dodie/vim-disapprove-deep-indentation : this plugin disapproves deeply indented code
+" ConradIrwin/vim-bracketed-paste       : handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
+
 let g:spacevim_custom_plugins = [
- \ ['edkolev/promptline.vim'],
  \ ['gilligan/vim-lldb'],
  \ ['myusuf3/numbers.vim', {'hook_add' : "let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'nerdtree', 'terminal']"}],
  \ ['plasticboy/vim-markdown', {'on_ft' : 'markdown'}],
@@ -59,6 +119,10 @@ let g:spacevim_custom_plugins = [
  \ ['chaoren/vim-wordmotion'],
  \ ['rliang/termedit.nvim'],
  \ ['vhdirk/vim-cmake'],
+ \ ['blueyed/vim-diminactive'],
+ \ ['dodie/vim-disapprove-deep-indentation'],
+ \ ['ConradIrwin/vim-bracketed-paste'],
+ \ ['kristijanhusak/vim-hybrid-material'],
  \ ]
 
 " {{{1
@@ -125,7 +189,14 @@ endfunction
 " {{{2
 " Neomake
 
-let g:neomake_cpp_enabled_makers = ['cmake', 'clang']
+"let g:neomake_cpp_enabled_makers = ['cmake', 'clang']
+let g:neomake_cpp_enabled_makers = ['uavia']
+
+let g:neomake_cpp_uavia_maker = {
+    \ 'exe': 'clang++',
+    \ 'args': ['-c', '-std=c++11', '-Wall', '-Wextra', '-I', '/home/atem/Documents/Uavia/embedded_dev/build_x86_64-Linux/release/include'],
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ }
 
 let g:neomake_cpp_cmake_maker = {
     \ 'exe': 'cmake',
@@ -136,7 +207,7 @@ let g:neomake_cpp_cmake_maker = {
 
 let g:neomake_make_maker = {
     \ 'exe': 'make',
-    \ 'args': ['-C libb2occ/cmake-build-debug'],
+    \ 'args': ['-C ../embedded_dev/build_x86_64-Linux4.10.11-1-ARCH/build_coreKit'],
     \ 'errorformat': '%f:%l:%c: %m',
     \ }
 
@@ -165,7 +236,7 @@ let g:rbpt_colorpairs = [
 
 let g:rbpt_max = 16
 
-let g:rbpt_loadcmd_toggle = 0
+let g:rbpt_loadcmd_toggle = 1
 
 "au VimEnter * RainbowParenthesesToggle
 "au Syntax * RainbowParenthesesLoadRound
@@ -181,6 +252,22 @@ let g:wordmotion_prefix = '<Leader>'
 
 " 2}}}
 
+" {{{2
+" blueyed/vim-diminactive
+
+" Enable (un)dimming windows on Vim's FocusLost and FocusGained events
+let g:diminactive_enable_focus = 1
+
+" 2}}}
+
+" {{{2
+" dodie/vim-disapprove-deep-indentation 
+
+let g:LookOfDisapprovalTabThreshold=5
+let g:LookOfDisapprovalSpaceThreshold=(&tabstop*5)
+
+" 2}}}
+
 " 1}}}
 
 " Terminal config
@@ -192,12 +279,6 @@ autocmd TermOpen term://* setl filetype=terminal
 
 " To switch to terminal mode automatically.
 "autocmd BufEnter term://* startinsert | setl filetype=terminal
-
-" General configuration
-
-" Do not show the mode in the command line (it is useless to show it there
-" since 'airline' already do it, in a nicest way).
-set noshowmode
 
 " Workspace Setup
 " ----------------
