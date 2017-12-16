@@ -22,3 +22,6 @@
 [submodule "font/awesome-terminal-fonts"]
 	path = font/awesome-terminal-fonts
 	url = https://github.com/gabrielelana/awesome-terminal-fonts
+[submodule "SpaceVim/.SpaceVim"]
+	path = SpaceVim/.SpaceVim
+	url = https://github.com/SpaceVim/SpaceVim.git

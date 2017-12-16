@@ -5,8 +5,8 @@
 !# The "!" symbol start inline comment, for more readability I put an extra "#" after but it doesn't mean anything
 
 !# Background & foreground 
-#XTerm*background: black
-#XTerm*foreground: white
+!#XTerm*background: black
+!#XTerm*foreground: white
 
 !# Font
 XTerm*faceName: FuraMono-Regular Powerline:size=10
@@ -14,7 +14,7 @@ st*faceName: FuraMono-Regula Powerline:size=10
 
 !# Ensure that UTF-8 is correctly interpreted
 XTerm*locale: true
-xterm*utf8: 2 ! Took from wiki.archlinux "Locale"
+xterm*utf8: 2 !# Took from wiki.archlinux "Locale"
 
 !# Tell that 256 colors is support
 XTerm*termName: xterm-256color
@@ -26,137 +26,10 @@ xterm*bellIsUrgent: true
 !# Colorscheme #
 !###############
 
-!# Copy from ~/.dotfiles/Xresources/solarized/Xresources.dark
 
-!#define S_base03        #002b36
-!#define S_base02        #073642
-!#define S_base01        #586e75
-!#define S_base00        #657b83
-!#define S_base0         #839496
-!#define S_base1         #93a1a1
-!#define S_base2         #eee8d5
-!#define S_base3         #fdf6e3
-!
-!*background:            S_base03
-!*foreground:            S_base0
-!*fadeColor:             S_base03
-!*cursorColor:           S_base1
-!*pointerColorBackground:S_base01
-!*pointerColorForeground:S_base1
-!
-!#define S_yellow        #b58900
-!#define S_orange        #cb4b16
-!#define S_red           #dc322f
-!#define S_magenta       #d33682
-!#define S_violet        #6c71c4
-!#define S_blue          #268bd2
-!#define S_cyan          #2aa198
-!#define S_green         #859900
-
-!# black dark/light
-!*color0:                S_base02
-!*color8:                S_base03
-
-!# red dark/light
-!*color1:                S_red
-!*color9:                S_orange
-
-!# green dark/light
-!*color2:                S_green
-!*color10:               S_base01
-!
-!!# yellow dark/light
-!*color3:                S_yellow
-!*color11:               S_base00
-!
-!!# blue dark/light
-!*color4:                S_blue
-!*color12:               S_base0
-!
-!!# magenta dark/light
-!*color5:                S_magenta
-!*color13:               S_violet
-!
-!!# cyan dark/light
-!*color6:                S_cyan
-!*color14:               S_base1
-!
-!!# white dark/light
-!*color7:                S_base2
-!*color15:               S_base3
-
-
-!# Tentative d'utiliser un autre colorscheme ...
-!!#define Ansi_0_Color #222d3f
-!!#define Ansi_1_Color #a82320
-!!#define Ansi_10_Color #2d9440
-!!#define Ansi_11_Color #e5be0c
-!!#define Ansi_12_Color #3c7dd2
-!!#define Ansi_13_Color #8230a7
-!!#define Ansi_14_Color #35b387
-!!#define Ansi_15_Color #e7eced
-!!#define Ansi_2_Color #32a548
-!!#define Ansi_3_Color #e58d11
-!!#define Ansi_4_Color #3167ac
-!!#define Ansi_5_Color #781aa0
-!!#define Ansi_6_Color #2c9370
-!!#define Ansi_7_Color #b0b6ba
-!!#define Ansi_8_Color #212c3c
-!!#define Ansi_9_Color #d4312e
-!!#define Background_Color #002240
-!!#define Bold_Color #e7eced
-!!#define Cursor_Color #e5be0c
-!!#define Cursor_Text_Color #ffffff
-!!#define Foreground_Color #2cc55d
-!!#define Selected_Text_Color #ffffff
-!!#define Selection_Color #792b9c
-
-!# Using iterm2_colorscheme config
-#include "${HOME}/dotfiles/X/.Xresources/iterm2_colorscheme/Xresources/Flat"
-
-Rxvt*color0:       Ansi_0_Color
-Rxvt*color1:       Ansi_1_Color
-Rxvt*color2:       Ansi_2_Color
-Rxvt*color3:       Ansi_3_Color
-Rxvt*color4:       Ansi_4_Color
-Rxvt*color5:       Ansi_5_Color
-Rxvt*color6:       Ansi_6_Color
-Rxvt*color7:       Ansi_7_Color
-Rxvt*color8:       Ansi_8_Color
-Rxvt*color9:       Ansi_9_Color
-Rxvt*color10:      Ansi_10_Color
-Rxvt*color11:      Ansi_11_Color
-Rxvt*color12:      Ansi_12_Color
-Rxvt*color13:      Ansi_13_Color
-Rxvt*color14:      Ansi_14_Color
-Rxvt*color15:      Ansi_15_Color
-Rxvt*colorBD:      Bold_Color
-Rxvt*colorIT:      Italic_Color
-Rxvt*colorUL:      Underline_Color
-Rxvt*foreground:   Foreground_Color
-Rxvt*background:   Background_Color
-Rxvt*cursorColor:  Cursor_Color
-
-XTerm*color0:      Ansi_0_Color
-XTerm*color1:      Ansi_1_Color
-XTerm*color2:      Ansi_2_Color
-XTerm*color3:      Ansi_3_Color
-XTerm*color4:      Ansi_4_Color
-XTerm*color5:      Ansi_5_Color
-XTerm*color6:      Ansi_6_Color
-XTerm*color7:      Ansi_7_Color
-XTerm*color8:      Ansi_8_Color
-XTerm*color9:      Ansi_9_Color
-XTerm*color10:     Ansi_10_Color
-XTerm*color11:     Ansi_11_Color
-XTerm*color12:     Ansi_12_Color
-XTerm*color13:     Ansi_13_Color
-XTerm*color14:     Ansi_14_Color
-XTerm*color15:     Ansi_15_Color
-XTerm*colorBD:     Bold_Color
-XTerm*colorIT:     Italic_Color
-XTerm*colorUL:     Underline_Color
-XTerm*foreground:  Foreground_Color
-XTerm*background:  Background_Color
-XTerm*cursorColor: Cursor_Color
-
+!# Script idea
+!# concat Xresources/theme file 
+!# think how to update wm color (border, ...)
+!# concat rofi config -> set rofi config to match Xresources/theme
+!# if vim/base16-theme exists set vim to use it
+ 

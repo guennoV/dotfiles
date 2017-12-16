@@ -10,3 +10,10 @@ rofi.bw: 3
 rofi.separator-style: solid
 rofi.hide-scrollbar: true
 
+ 
+! Script idea
+! The script have to be launch by the graphic server (X | Wayland)
+! sed 's/\(rofi.color-window:\) #[0-9]+, #[0-9]+, #[0-9]+'/\1 ${background}, ${border}, ${separator}'
+! sed 's/\(rofi.color-normal:\) #[0-9]+, #[0-9]+, #[0-9]+, #[0-9]+, #[0-9]+/\1 ${background}, ${foreground}, ${background_alt}, ${highlight_background}, ${highlight-foreground}'
+! sed 's/\(rofi.color-active:\) #[0-9]+, #[0-9]+, #[0-9]+, #[0-9]+, #[0-9]+/\1 ${background}, ${foreground}, ${background_alt}, ${highlight_background}, ${highlight-foreground}'
+! sed 's/\(rofi.color-urgent:\) #[0-9]+, #[0-9]+, #[0-9]+, #[0-9]+, #[0-9]+/\1 ${background}, ${foreground}, ${background_alt}, ${highlight_background}, ${highlight-foreground}'

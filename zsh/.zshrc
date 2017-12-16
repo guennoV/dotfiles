@@ -4,7 +4,7 @@
 #export PATH="${PATH}:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Local
-export PATH="$HOME/.local/bin:${PATH}"
+export PATH="$HOME/bin:$HOME/.local/bin:${PATH}"
 
 export EDITOR='nvim'
 export HISTFILE="$HOME/.history"
@@ -18,8 +18,8 @@ export WATCHFMT='%n has %a %l from %m at %T'
 export LOGIN='guenno_v'
 
 # Environment variable for UAVIA
-#export UAVIA_EMBEDDED_SOFTWARE_DIR=/home/atem/Documents/Uavia/embedded_dev
-
+export UAVIA_EMBEDDED_SOFTWARE_DIR=/home/atem/Documents/Uavia/uavia-embedded/
+export PKG_CONFIG_PATH=${UAVIA_EMBEDDED_SOFTWARE_DIR}/build_$(uname -m)-$(uname -s)$(uname -r)/release/lib/pkgconfig
 # Set transparent background for xterm
 #[ -n "$XTERM_VERSION" ] && transset-df --id "$WINDOWID" > /dev/null
 
@@ -67,7 +67,7 @@ setopt AUTO_MENU
 
 # If  a  parameter  is  completed  whose  content is  the  name  of  a
 # directory, then add a trailing slash instead of a space.
-setopt AUTO_PARAM_SLASH
+#setopt AUTO_PARAM_SLASH
 
 # Prevents  aliases   on  the  command  line   from  being  internally
 # substituted before  completion is attempted.  The effect  is to make
@@ -232,6 +232,9 @@ setopt LONG_LIST_JOBS
 # This may be useful with terminals with other cut/paste methods.
 setopt TRANSIENT_RPROMPT
 
+# Remove space after rprompt
+ZLE_RPROMPT_INDENT=0
+
 # powerline
 POWERLINE_BASE_PATH="/usr/lib/$(ls /usr/lib | grep "^python3.*$")"
 . $POWERLINE_BASE_PATH/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -331,6 +334,7 @@ alias df='df -h'
 alias du='du -h'
 alias ls='ls -h --color=auto'
 alias ll='ls -l'
+alias llt='ll -t'
 alias l='ll'
 alias la='ls -la'
 alias cp='cp -v'
@@ -346,7 +350,6 @@ alias cln='clean'
 alias iit_auth='/bin/ns_auth -u guenno_v'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
-alias build-dev='( eval "$(${HOME}/Documents/Uavia/build_dev_pattern)" )'
 
 ######################################################################
 ###
@@ -428,16 +431,18 @@ setenv()
     typeset -x "${1}${1:+=}${(@)argv[2,$#]}"
 }
 
-# To delete
-export CC=clang
-export CXX=clang++
-export CXXFLAGS='-g2 -ggdb'
-
 # Syntax highlighting plugin
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # hook that will automatically search the official repositories, when entering an unrecognized command
 source /usr/share/doc/pkgfile/command-not-found.zsh
+
+# Env management
+source ~/.zsh/zsh-autoenv/init.zsh
+
+source ~/.fonts/fontawesome-regular.sh
+# Virtualenv wrapper
+#source /usr/bin/virtualenvwrapper.sh
 
 #########################
 ###

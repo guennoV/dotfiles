@@ -4,13 +4,15 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char font[] = "Fixed:pixelsize=13:style=SemiCondensed";
+static char font[] = "NotoMono:pixelsize=12:style=Regular";
 static int borderpx = 2;
 
 /*
  * word delimiter string
  *
  * More advanced example: " \"()[]{}<>|";
+ */
+static char worddelimiters[] = " \"()[]{}<>|";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;

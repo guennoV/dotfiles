@@ -13,7 +13,12 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+#font NotoSans-Regular 12, pango:Hack, FontAwesome 12
+#font pango:Hack
+#font pango:NotoSans-Regular
+#font pango:FontAwesome 12
+font pango:fontawesome-regular
+#font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -29,45 +34,137 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Colors
+set_from_resource $darkred     color1  #000000
+set_from_resource $red         color9  #000000
+set_from_resource $darkgreen   color2  #000000
+set_from_resource $green       color10 #000000
+set_from_resource $darkyellow  color3  #000000
+set_from_resource $yellow      color11 #000000
+set_from_resource $darkblue    color4  #000000
+set_from_resource $blue        color12 #000000
+set_from_resource $darkmagenta color5  #000000
+set_from_resource $magenta     color13 #000000
+set_from_resource $darkcyan    color6  #000000
+set_from_resource $cyan        color14 #000000
+set_from_resource $darkwhite   color7  #000000
+set_from_resource $white       color15 #000000
+
+# Use custom colors for black
+set $black       #282828
+set $darkblack   #1d2021
+set $transparent #00000000
+
+# Client configuration
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $black      $black      $darkwhite  $darkblack  $darkblack
+client.unfocused        $black      $darkblack  $white      $darkblack  $darkblack
+client.focused_inactive $black      $black      $white      $darkblack  $darkblack
+client.urgent           $darkred    $darkred    $black      $darkred    $darkred
+client.background       $black
+
+# Workspace
+
+set $ws1  "1: "
+set $ws2  "2:  "
+set $ws3  "3:  "
+set $ws4  "4:  "
+set $ws5  "5:  "
+set $ws6  "6:  "
+set $ws7  "7: "
+set $ws8  "8: "
+set $ws9  "9: "
+set $ws10 "10:  "
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+bindsym $mod+Tab workspace back_and_forth
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Gaps
+set $default_gaps_inner 20 
+set $default_gaps_outer 20
+
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+
+#workspace $ws1  gaps inner 0
+#workspace $ws1  gaps outer 0
+#workspace $ws9  gaps inner 0
+#workspace $ws9  gaps outer 0
+#workspace $ws10 gaps inner 0
+#workspace $ws10 gaps outer 0
+
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 0 ms
+focus_on_window_activation urgent
+
+########
+# Keys #
+########
+
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+# start rofi (a program launcher)
+bindsym $mod+d exec rofi -show run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+semicolon split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -92,29 +189,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -149,9 +223,50 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+bindsym F5 exec "xbacklight -dec 10"
+bindsym F6 exec "xbacklight -inc 10"
+
+bindsym F10 exec "~/.config/polybar/pavolume.sh --togmute"
+bindsym F11 exec "~/.config/polybar/pavolume.sh --down"
+bindsym F12 exec "~/.config/polybar/pavolume.sh --up"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-#        status_command i3status
-#        status_command polybar
+        status_command "polybar example"
+        i3bar_command "i3bar -t"
+
+        # hide the default i3 workspace status bar
+        # if using the 'hide' value, the i3 workspace bar will be invisible until you press $mod key
+        mode invisible
+        strip_workspace_numbers yes
+        colors {
+            background #00000000
+            statusline #00000000
+        }
 }
+
+###########
+# Windows #
+###########
+
+# Hide windows title
+for_window [class="^.*"] border toggle
+
+# bindkey to toggle window title
+#bindsym Control+Shift+1 [class="^.*"] border toggle
+
+############
+# Start up #
+############
+
+# Starting some processes at startup
+exec --no-startup-id i3-msg "workspace $ws1; exec /usr/bin/terminator"
+exec --no-startup-id i3-msg "workspace $ws2; exec /usr/bin/firefox"
+exec --no-startup-id i3-msg "workspace $ws3; exec /usr/bin/thunderbird"
+exec --no-startup-id i3-msg "workspace $ws4; exec /usr/bin/firefox -new-url https://open.spotify.com/login"
+
+exec --no-startup-id setxkbmap -layout us,fr -option grp:menu_toggle 
+
+# Set wallpaper
+exec --no-startup-id feh --bg-scale ~/Downloads/milky_way_Algonquin_Highlands.jpg

@@ -1,0 +1,19 @@
+# How to use
+# Create a new 'Host' that we will use to refer to a set of config : Host $hostname
+# Specify the real hostname in the 'Hostname' line (usually : Hostname github.com
+#
+# Then in the existing repository use the line below :
+# git remote set-url origin git@$hostname:$path_to_git
+
+#Uavia account
+Host github-uavia
+    HostName github.com
+    IdentityFile ~/.ssh/uavia
+    IdentitiesOnly yes
+
+# Personnal account
+Host github-guennoV
+    HostName github.com
+    IdentityFile ~/.ssh/atem-git
+    IdentitiesOnly yes
+
